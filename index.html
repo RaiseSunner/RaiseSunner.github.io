@@ -95,7 +95,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -218,9 +218,41 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -249,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/14/JPA持久化persistence-xml配置文件及参数详解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/SSL技术原理及应用-网络信息安全（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="RaiseSunner">
@@ -268,7 +300,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/14/JPA持久化persistence-xml配置文件及参数详解/" itemprop="url">JPA持久化persistence.xml配置文件及参数详解</a></h1>
+                <a class="post-title-link" href="/2019/03/25/SSL技术原理及应用-网络信息安全（一）/" itemprop="url">SSL技术原理及应用-网络信息安全（一）</a></h1>
         
 
         <div class="post-meta">
@@ -280,8 +312,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-14T10:11:47+08:00">
-                2019-03-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-25T10:13:08+08:00">
+                2019-03-25
               </time>
             
 
@@ -290,28 +322,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -342,14 +352,15 @@
       
         
           
-            <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>　　JPA是Java Persistence API的简称，中文名Java持久层API，是JDK 5.0注解或XML描述对象－关系表的映射关系，并将运行期的实体对象持久化到数据库中。</p>
-<hr>
-<h2 id="JPA包括以下三个方面的技术："><a href="#JPA包括以下三个方面的技术：" class="headerlink" title="JPA包括以下三个方面的技术："></a>JPA包括以下三个方面的技术：</h2><p>1、 ORM映射元数据<br>　　JPA支持XML和JDK注解两种元数据的形式，元数据描述对象和表之间的映射关系，框架据此景实体对象持久化到数据库表中<br>2、API<br>　　用来操作实体对象，执行CRUD操作，框架在后台代替我们完成所有的事情，开发者能够从繁琐的JDBC和SQL代码中解放出来<br>3、查询语言<br>　　通过面向对象数据库的查询语言查询数据，避免程序的SQL语句的高度耦合</p>
-<hr>
-<h2 id="持久化单元的具有的属性"><a href="#持久化单元的具有的属性" class="headerlink" title="持久化单元的具有的属性:"></a>持久化单元的具有的属性:</h2><p>1、该持久性单元内的实体类<br>2、为上述实体类提供持久性支持的提供者或库<br>　　JPA实现，能够为应用提供持久性对象的库。<br>3、上述实体类的数据源<br>　　是指提供实体类存储的数据库。数据源必须在服务器中注册并且使用JNDI名称指定。如果事务是由容器管理的JTA事务， 那么数据源就必须是JTA数据源，如果事务是由应用负责管理，那么数据源就必须是JDBC连接指定。<br>4、应用使用的事务类型<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">persistence</span>&gt;</span></span><br><span class="line">	version = "2.1"</span><br><span class="line">	xmlns = "http://xmlns.jcp.org/xml/ns/persistence"</span><br><span class="line">	xmlns = "http://www.w3.org/2001/XMLSchema-instance"</span><br><span class="line">	xsi:shemaLocation = "http://xmlns.jcp.org/xml/ns/persistence</span><br><span class="line">						 http://xmlns.jcp.org/xml/ns/persistence_2_1.xsd"</span><br><span class="line">    <span class="comment">&lt;!--配置持久化单元--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">persistence_unit</span> <span class="attr">name</span> = <span class="string">"HelloWorldPU"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--数据库连接 Jta-data-source和 non-jta-data-source用于分别指定持久化提供商使用的JTA和/或non-JTA数据源的全局JNDI名称(可选)--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">jta-data-source</span>&gt;</span>myDS<span class="tag">&lt;/<span class="name">jta-data-source</span>&gt;</span></span><br><span class="line">    	<span class="comment">&lt;!-- 声明orm.xml所在位置.即指定映射文件 (可选) --&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">mapping-file</span>&gt;</span>product.xml<span class="tag">&lt;/<span class="name">mapping-file</span>&gt;</span>  </span><br><span class="line">        </span><br><span class="line">        <span class="comment">&lt;!-- 以包含persistence.xml的jar文件为基准的相对路径,添加额外的jar文件.指定托管类的附加JAR(可选) --&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">jar-file</span>&gt;</span>../lib/model.jar<span class="tag">&lt;/<span class="name">jar-file</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    	<span class="comment">&lt;!--持久化类--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">class</span>&gt;</span>com.lzb.mitan<span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line">    	</span><br><span class="line">    	<span class="comment">&lt;!--为映射的类禁用扫描--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">exclude-unlisted-classes</span>&gt;</span>true<span class="tag">&lt;/<span class="name">exclude-unlisted-classes</span>&gt;</span></span><br><span class="line">    	</span><br><span class="line">    	<span class="comment">&lt;!--设置属性--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    	    <span class="comment">&lt;!--自动输出schema创建DDL语句 value的值可以是 create-drop / create / update  </span></span><br><span class="line"><span class="comment">                值得注意的是create-drop他会在SESSION关闭后删除所有表开启式再创建。 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.hbm2ddl.auto"</span> <span class="attr">value</span>=<span class="string">"update"</span> /&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.show_sql"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span> </span><br><span class="line">    	    </span><br><span class="line">    	    <span class="comment">&lt;!--删除/重建SQL架构--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> </span></span><br><span class="line"><span class="tag">                <span class="attr">name</span> = <span class="string">"javax.persistence.schema-generation.database.action"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">value</span> = <span class="string">"drop-and-create"</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--格式化SQL--&gt;</span>		</span><br><span class="line">    	    <span class="tag">&lt;<span class="name">property</span> </span></span><br><span class="line"><span class="tag">    	    	<span class="attr">name</span> = <span class="string">"hibernate.format_sql"</span> <span class="attr">value</span> = <span class="string">"true"</span>/&gt;</span></span><br><span class="line">    	    </span><br><span class="line">    	    <span class="tag">&lt;<span class="name">property</span></span></span><br><span class="line"><span class="tag">    	    	<span class="attr">name</span> = <span class="string">"hibernate.use_sql_comments"</span> <span class="attr">value</span> = <span class="string">"true"</span>/&gt;</span></span><br><span class="line">    	    		</span><br><span class="line">    	<span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">persistence_unit</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">persistence</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>　　持久化单元能够被打包成war文件，作用域取决于persistence.xml的位置。<br><strong>注意</strong>：persistence.xml文件的位置决定持久性的根——jar文件或者是包含META-INF的目录</p>
-
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/25/SSL技术原理及应用-网络信息安全（一）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -396,7 +407,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/Hibernate主键生成策略/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/14/Unix-IO概述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="RaiseSunner">
@@ -415,7 +426,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/13/Hibernate主键生成策略/" itemprop="url">hibernate实体类编写规则与主键生成策略</a></h1>
+                <a class="post-title-link" href="/2018/03/14/Unix-IO概述/" itemprop="url">Unix-IO概述</a></h1>
         
 
         <div class="post-meta">
@@ -427,8 +438,157 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-13T20:19:36+08:00">
-                2019-03-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-14T15:04:38+08:00">
+                2018-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unix/" itemprop="url" rel="index">
+                    <span itemprop="name">Unix</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Devices的表现形式　　在Unix系统中，一个文件存储为若干个字节的序列。包括网络适配器、磁盘和终端等设备都被描述为文件。所所有输入输出动作的执行都是通过对这些文件适当的读写实现的。正是因为这些从设备到文件的映射，允许系统内核对位提供一些简单低级的应用程序接口。例如Unix I/O 使得应用程序的输入输出可以使用一种统一的方式执行。
+Unix IO可以完成的操作　　Opening Files：应用程序需要通过请求系统内核访问对应的IO设备，以完成打开文件的相应操作。系统内核返回一个描述符，该描述符为较小的非负整数，用来在后续的所有的文件操作中标识该文件。内核会保持跟踪打开文件的所有信息，应
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/14/Unix-IO概述/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/14/JPA持久化persistence-xml配置文件及参数详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="RaiseSunner">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploader/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rain's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/14/JPA持久化persistence-xml配置文件及参数详解/" itemprop="url">JPA持久化persistence.xml配置文件及参数详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T10:11:47+08:00">
+                2017-03-14
               </time>
             
 
@@ -489,50 +649,451 @@
       
         
           
-            <h1 id="实体类的编写规则"><a href="#实体类的编写规则" class="headerlink" title="实体类的编写规则"></a>实体类的编写规则</h1><ul>
-<li>类中的属性是私有的  </li>
-<li>属性需要使用公开的set和get方法操作  </li>
-<li>类必须要有一个属性作为唯一值，我们一般使用Id作为这个唯一值  </li>
-<li>类中的属性不建议使用基本数据类型，一般使用数据类型对应的包装类</li>
-<li>java中的基本类型对应的包装类分别是： byte–&gt;Byte、short–&gt;Short、 int–&gt;Integer、long–&gt;Long等 </li>
-</ul>
-<p>为什么会有这样一种建议呢？使用一个简单的例子进行说明：</p>
-<blockquote>
-<p>老师在阅卷完成之后需要需要登记学生的分数，如果使用int类型的数据来记录分时，那么在这种情况下将不能表示缺考学生的成绩标记，因为Java中int类型的数据不为null，它的默认值为0，相关的代码示例如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User2</span> </span>&#123;  </span><br><span class="line">　<span class="keyword">private</span> Integer id;  </span><br><span class="line">　<span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">　　<span class="keyword">return</span> id;  </span><br><span class="line">　&#125;  </span><br><span class="line">　<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;  </span><br><span class="line">　　<span class="keyword">this</span>.id = id;  </span><br><span class="line">　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h1 id="hibernate主键生成策略"><a href="#hibernate主键生成策略" class="headerlink" title="hibernate主键生成策略"></a>hibernate主键生成策略</h1><p>hibernate中要求实体类中有一个属性值作为唯一值来对应表中的主键，而主键具有多种生成策略，具体的分类如下：</p>
-<ul>
-<li><p>assigned<br>　主键由外部德生序负责产生，在调用hibernate的save()方法之前必须指定一个。hibernate不负责维护主键生成，与hibernate以及底层的数据库都没有任何关系，可以跨数据库，人为进行控制主键生成。在存储对象的时候，必须使用主键的setter()方法给主键赋值，这种方法应该尽量避免，相关代码示例如下：  </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span>  </span><br><span class="line">　<span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"assigned"</span> /&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>increment<br>　用于long、short、int等整数类型，由hibernate自发的以递增的方式生成唯一标识，每一次的增量为1，只有当没有其他进程向同一表中插入数据的时候才能使用，不能在集群的环境下使用。适用于代理主键。相关的代码示例如下：  </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"increment"</span> /&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>hilo<br>　hilo是hibernate中最常用的一种生成方式，需要一张额外的表保存hi的值。保存hi值的表至少有一条记录(只根本第一条记录有关)，否则会出现错误。使用该方式可以跨数据库<br>　hilo生成主键的过程(以hibernate_unique_key表，next_hi列为例)：<br>　　1) 获取hi值：读取并记录数据库的hibernate_unique_key表中的next_hi字段的值，数据库中此字段的值加1保存<br>　　2) 获得lo值：从0到max_lo循环取值，差值为1，当值为max_lo时，重新获取hi值，然后lo值继续从0到max_lo循环<br>　　3) 根据公式 hi*(max_lo + 1) + lo 计算生成主键值  </p>
-<pre><code>**注意** ：当hi值是0的时候，那么第一个值不是 0*(max_lo + 1) + 0，而是lo跳过0从1开始  
-问题：max_lo 配置为多大合适？  
-　　这是根据具体的情况而定，如果系统一般不重启，而且需要用此表建立大量的主键，可以把 max_lo 配置较大一点，减少读取表的次数，提高效率；反之，如果服务器经常重启，可以把 max_lo 设置小一点，避免每次重启导致主键值不连贯。具体的代码示例如下：   
-</code></pre><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span>  </span><br><span class="line">　<span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"hilo"</span>&gt;</span>  </span><br><span class="line">　　<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"table"</span>&gt;</span>hibernate_hilo<span class="tag">&lt;/<span class="name">param</span>&gt;</span><span class="comment">&lt;!--指定保存hi值的表名--&gt;</span>  </span><br><span class="line">　　<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"column"</span>&gt;</span>next_hi<span class="tag">&lt;/<span class="name">param</span>&gt;</span><span class="comment">&lt;!--指定保存hi值的列名--&gt;</span>  </span><br><span class="line">　　<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"max_lo"</span>&gt;</span>100<span class="tag">&lt;/<span class="name">param</span>&gt;</span><span class="comment">&lt;!--指定低位的最大值--&gt;</span>  </span><br><span class="line">　<span class="tag">&lt;/<span class="name">generator</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">id</span>&gt;</span>  </span><br><span class="line"><span class="comment">&lt;!--也可以省略table和column配置，其默认的表为hibernate_unique_key，列为next_hi--&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>seqhilo<br>　与hilo类似，通过hi/lo算法实现主键生成实例，只是将hilo中的数据表换成了序列sequence，需要数据库中创建sequence，适用于支持序列类型的数据库。具体代码如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span>  </span><br><span class="line">　 <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"seqhilo"</span>&gt;</span>  </span><br><span class="line">　　 <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"sequence"</span>&gt;</span>hibernate_seq<span class="tag">&lt;/<span class="name">param</span>&gt;</span>  </span><br><span class="line">　　 <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"max_lo"</span>&gt;</span>100<span class="tag">&lt;/<span class="name">param</span>&gt;</span>  </span><br><span class="line">　 <span class="tag">&lt;/<span class="name">generator</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>sequence<br>　hibernate根据底层数据库序列生成标识符，条件是数据库支持序列，代码示例如下：  </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"sequence"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"sequence"</span>&gt;</span>hibernate_id<span class="tag">&lt;/<span class="name">param</span>&gt;</span><span class="comment">&lt;!--指定sequence的名称--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">generator</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>identity<br>　采用底层数据库本身提供的主键生成标识符。identity是由数据库自己生成的，这个主键必须设置为自增长，只有满足该条件的数据库能使用</p>
-</li>
-<li>native<br>　native是由hibernate根据使用的数据库自行判断采用identity、hilo、sequence其中的一种作为主键生成方式，灵活性很高</li>
-<li>uuid<br>　采用128位的UUID生成算法。该算法能够在网络环境中生成唯一的标识符，被编码为一个长度为32位的十六进制字符串，但是由于字符串类型的主键比整型的主键要占用更多的空间，并不是很流行，适用于代理主键  </li>
-<li>guid<br>　Globally Unique Identifier全球唯一标识符，也称作 UUID，是一个128位长的数字，用16进制表示。算法的核心思想是结合机器的网卡、当地时间、一个随即数来生成GUID。从理论上讲，如果一台机器每秒产生10000000个GUID，则可以保证（概率意义上）3240年不重复。  </li>
-<li><p>foreign<br>　使用另外一个相关联的对象的主键作为该对象主键。主要用于一对一关系中。具体代码示例如下：　　</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"foreign"</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"property"</span>&gt;</span>user<span class="tag">&lt;/<span class="name">param</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;/<span class="name">generator</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">id</span>&gt;</span> <span class="tag">&lt;<span class="name">one-to-one</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">class</span>=<span class="string">"domain.User"</span> <span class="attr">constrained</span>=<span class="string">"true"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>select<br>　使用触发器生成主键，主要用于早起的数据库生成机制，能用到的地方非常少</p>
-</li>
-</ul>
+          概念　　JPA是Java Persistence API的简称，中文名Java持久层API，是JDK 5.0注解或XML描述对象－关系表的映射关系，并将运行期的实体对象持久化到数据库中。
+
+JPA包括以下三个方面的技术：1、 ORM映射元数据　　JPA支持XML和JDK注解两种元数据的形式，元数据描述对象和表之间的映射关系，框架据此景实体对象持久化到数据库表中2、API　　用来操作实体对象，执行CRUD操作，框架在后台代替我们完成所有的事情，开发者能够从繁琐的JDBC和SQL代码中解放出来3、查询语言　　通过面向对象数据库的查询语言查询数据，避免程序的SQL语句的高度耦合
+
+持久化单元的具有的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/14/JPA持久化persistence-xml配置文件及参数详解/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/Hibernate主键生成策略/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="RaiseSunner">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploader/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rain's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/13/Hibernate主键生成策略/" itemprop="url">hibernate实体类编写规则与主键生成策略</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T20:19:36+08:00">
+                2017-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          实体类的编写规则
+类中的属性是私有的  
+属性需要使用公开的set和get方法操作  
+类必须要有一个属性作为唯一值，我们一般使用Id作为这个唯一值  
+类中的属性不建议使用基本数据类型，一般使用数据类型对应的包装类
+java中的基本类型对应的包装类分别是： byte–&gt;Byte、short–&gt;Short、 int–&gt;Integer、long–&gt;Long等 
+
+为什么会有这样一种建议呢？使用一个简单的例子进行说明：
+
+老师在阅卷完成之后需要需要登记学生的分数，如果使用int类型的数据来记录分时，那么在这种情况下将不能表示缺考学生的成绩标记，因为Java中int类型的数据
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/13/Hibernate主键生成策略/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/25/体系结构-计算机网络（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="RaiseSunner">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploader/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rain's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/25/体系结构-计算机网络（二）/" itemprop="url">体系结构-计算机网络（二）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-25T10:10:35+08:00">
+                2016-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/03/25/体系结构-计算机网络（二）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/24/基本概念与数据交换-计算机网络（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="RaiseSunner">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploader/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rain's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/24/基本概念与数据交换-计算机网络（一）/" itemprop="url">基本概念与数据交换-计算机网络（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-24T09:53:35+08:00">
+                2016-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/computer-network/" itemprop="url" rel="index">
+                    <span itemprop="name">computer network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          　　计算机网络，通常也被简称为网络，是利用通信设备和线路与将地理位置不同的、功能独立的多个计算机系统连接起来，以功能完善的网络软件实现网路偶的硬件、软件及资源的共享和信息传递的系统。简单来说，就是连接两台或者多台计算机进行通信的系统。在了解计算机网络之前，需要了解一下互联网的基本概念。
+互联网的基本概念互联网的基本特点　　计算机网络具有两个鲜明的特点：　　1、连通性。所谓连通性就是互联网使得上网用户之间，不管相距多远，都可以很便捷、非常经济的交换各种信息，就好像是这些终端的用户始终是连接在一起的。　　2、共享。共享就是资源共享，可以是信息共享、软件共享、也可以是硬件共享。由于网络的存在，我们就
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/03/24/基本概念与数据交换-计算机网络（一）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -614,7 +1175,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -625,7 +1186,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -636,7 +1197,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -646,6 +1207,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/RaiseSunner" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:www.raisesunner@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -683,18 +1260,6 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
 
         
 
@@ -711,6 +1276,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
@@ -739,6 +1306,9 @@
 
 
 
+
+  
+  
 
 
 
@@ -776,6 +1346,16 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
   
 
 
@@ -841,6 +1421,323 @@
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
 
 
 
